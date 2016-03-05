@@ -1,0 +1,3 @@
+./data/CaseMismatchTest.xpl:8:9: error: case of type string does not match switch of type integer!
+./data/CaseMismatchTest.xpl:14:9: error: case of type integer does not match switch of type string!
+./data/CaseMismatchTest.xpl:error: input contains errors

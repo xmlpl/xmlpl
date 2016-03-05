@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x"/>
+      <exprstmt>
+        <elem>
+          <qname>
+            <cast to="qname" from="string">
+              <const value="e" type="string"/>
+            </cast>
+          </qname>
+          <block>
+            <vardecl type="node[]" name="x"/>
+          </block>
+        </elem>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

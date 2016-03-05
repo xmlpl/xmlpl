@@ -1,0 +1,6 @@
+./data/ParseSegFaultTest.xpl:3:1: error: unexpected token: }
+./data/ParseSegFaultTest.xpl:4:1: error: unexpected end of file
+./data/ParseSegFaultTest.xpl:4:1: error: expecting CPAREN, found ''
+./data/ParseSegFaultTest.xpl:4:1: error: unexpected end of file
+./data/ParseSegFaultTest.xpl:4:1: error: unexpected end of file
+./data/ParseSegFaultTest.xpl:4:1: error: Fatal error during parse

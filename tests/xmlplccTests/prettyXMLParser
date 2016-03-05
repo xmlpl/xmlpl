@@ -1,0 +1,19 @@
+#!/bin/bash
+BASE=$(dirname $0)/data/$(basename $0)
+OUT=$BASE.stdout
+XMLPL_LIBRARY_PATH=$(dirname $0)/../libs
+export XMLPL_LIBRARY_PATH
+
+TIDYOPS="--indent auto --indent-spaces 2 -xml --wrap 0 --indent-attributes no --literal-attributes yes -q"
+
+xmlplcc -X --no-line-info -o - $BASE.xpl >$OUT.tmp
+RET=$?
+
+if [ $RET -ne 0 ]; then
+    cat $OUT.tmp 
+else
+    cat $OUT.tmp | tidy $TIDYOPS | sed -e 's/ \/>/\/>/g'
+fi
+
+rm $OUT.tmp
+exit $RET

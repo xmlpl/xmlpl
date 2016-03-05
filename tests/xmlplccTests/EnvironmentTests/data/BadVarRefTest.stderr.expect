@@ -1,0 +1,2 @@
+./data/BadVarRefTest.xpl:3:3: error: undeclared variable y
+./data/BadVarRefTest.xpl:error: input contains errors

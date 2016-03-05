@@ -1,0 +1,2 @@
+./data/EmptyDefaultTest.xpl:5:3: error: default case cannot be empty!
+./data/EmptyDefaultTest.xpl:error: input contains errors

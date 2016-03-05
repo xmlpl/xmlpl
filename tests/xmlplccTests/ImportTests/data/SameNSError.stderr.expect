@@ -1,0 +1,2 @@
+./data/SameNSError.xpl:error: Cannot import library '/home/jcoffland/projects/xmlpl/install//lib/xmlpl/std/libhello2.la' with same namespace as '/home/jcoffland/projects/xmlpl/install//lib/xmlpl/std/libhello.la'
+./data/SameNSError.xpl:error: input contains errors

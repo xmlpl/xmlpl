@@ -1,0 +1,2 @@
+./data/ImportAsNameClashTest.xpl:3:8: error: identifier 'x' previously declared at 1:9
+./data/ImportAsNameClashTest.xpl:error: input contains errors

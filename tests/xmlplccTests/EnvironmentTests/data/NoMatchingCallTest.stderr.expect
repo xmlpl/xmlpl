@@ -1,0 +1,5 @@
+./data/NoMatchingCallTest.xpl:5:3: error: no matching function for call: f(string, string)
+possible candidates are:
+  1:9: integer f(integer, integer)
+  2:9: integer f(string, integer)
+./data/NoMatchingCallTest.xpl:error: input contains errors

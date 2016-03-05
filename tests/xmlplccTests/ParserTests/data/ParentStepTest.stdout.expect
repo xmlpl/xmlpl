@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x"/>
+      <exprstmt>
+        <path>
+          <varref type="node[]" release="false" name="x"/>
+          <step axis="parent">
+            <empty/>
+          </step>
+        </path>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

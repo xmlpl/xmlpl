@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="integer" name="f">
+    <block/>
+  </funcdecl>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <fcall type="integer" name="f"/>
+        </cast>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

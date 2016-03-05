@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x"/>
+      <vardecl type="node[]" name="x0123456789_"/>
+      <vardecl type="node[]" name="name"/>
+      <vardecl type="prefix" name="p">
+        <fcall type="prefix" name="xmlpl.builtin.Prefix">
+          <const value="x.x" type="string"/>
+          <const value="http://example.com/" type="string"/>
+        </fcall>
+      </vardecl>
+      <exprstmt>
+        <elem>
+          <qname>
+            <varref type="prefix" release="false" name="p"/>
+            <const value="x-x" type="string"/>
+          </qname>
+        </elem>
+      </exprstmt>
+      <exprstmt>
+        <elem>
+          <qname>
+            <varref type="prefix" release="false" name="p"/>
+            <const value="x.x" type="string"/>
+          </qname>
+        </elem>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

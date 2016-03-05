@@ -1,0 +1,2 @@
+./data/DupVarDeclTest.xpl:3:10: error: identifier 'x' previously declared at 2:10
+./data/DupVarDeclTest.xpl:error: input contains errors

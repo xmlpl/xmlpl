@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="0" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="1" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="2" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="3" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="4" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="5" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="6" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="7" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="8" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="9" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="real">
+          <const value="0123456789.0123456789" type="real"/>
+        </cast>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

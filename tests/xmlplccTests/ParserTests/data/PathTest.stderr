@@ -1,0 +1,3 @@
+./data/PathTest.xpl:4:23: error: unexpected token: [
+./data/PathTest.xpl:4:24: error: unexpected token: pred2
+./data/PathTest.xpl:4:36: error: Fatal error during parse

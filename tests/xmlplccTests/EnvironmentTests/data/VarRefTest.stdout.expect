@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x"/>
+      <exprstmt>
+        <varref type="node[]" release="false" name="x"/>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

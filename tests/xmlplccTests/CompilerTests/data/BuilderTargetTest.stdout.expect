@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wrap><root>
+  <child attr="value"/>
+  <!--A Comment-->
+  Some Text
+  <?target processing instruction data?>
+</root></wrap>

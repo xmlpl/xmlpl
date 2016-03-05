@@ -1,0 +1,6 @@
+<config>
+	<interface type="public" device="eth1"/>
+	<rules default_action="DROP">
+	</rules>
+</config>
+

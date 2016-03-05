@@ -1,0 +1,2 @@
+./data/BadCallByReferenceTest.xpl:4:7: error: cannot pass constant by reference
+./data/BadCallByReferenceTest.xpl:error: input contains errors

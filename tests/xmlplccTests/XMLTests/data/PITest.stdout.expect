@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?target  This is a plain processing instruction.?>
+<?target ?>
+<?target This is a processing instruction with expressions.?>

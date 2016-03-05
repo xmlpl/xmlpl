@@ -1,0 +1,2 @@
+./data/InvalidReturnTest.xpl:2:3: error: return statement with value not allowed here
+./data/InvalidReturnTest.xpl:error: input contains errors

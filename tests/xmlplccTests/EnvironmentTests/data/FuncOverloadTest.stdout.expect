@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="f">
+    <arg type="integer" name="x"/>
+    <block/>
+  </funcdecl>
+  <funcdecl type="node[]" name="f">
+    <arg type="node[]" name="y"/>
+    <block/>
+  </funcdecl>
+</program>

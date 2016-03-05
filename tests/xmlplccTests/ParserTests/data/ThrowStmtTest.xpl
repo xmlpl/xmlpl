@@ -1,0 +1,3 @@
+node[] main() {
+  throw "error";
+}

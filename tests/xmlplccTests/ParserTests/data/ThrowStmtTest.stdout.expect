@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <throw>
+        <const value="error" type="string"/>
+      </throw>
+    </block>
+  </funcdecl>
+</program>

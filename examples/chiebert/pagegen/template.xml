@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Chris' Jump Page</title>
+  </head>
+  <body>
+    <center>
+      <h1>Chris' Jump Page</h1>
+
+      <!-- This just runs the date command -->
+      <h2><command wrap="true">date</command></h2>
+
+      <h2>Searches:</h2> 
+      <!-- The searches command reads searches.xml from standard input
+           and outputs the search bars and buttons as formated XHTML.
+           Notice I had to escape the less than symbol in the command -->
+      <command>./searchgen 2 &lt; searches.xml</command>
+
+      <h2>Links:</h2>
+      <!-- The links command reads bookmarks.xml from standard input
+           and outputs XHTML data. The 'Homepage' parameter tells it
+           to only use the links in the Homepage folder.  -->
+      <command>./linksgen cs242 &lt; bookmarks.xml</command>
+    </center>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="string" name="f">
+    <arg type="string" name="s"/>
+    <block>
+      <return>
+        <varref type="string" release="false" name="s"/>
+      </return>
+    </block>
+  </funcdecl>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <exprstmt>
+        <const value="No Affect!
+" type="string"/>
+      </exprstmt>
+      <exprstmt>
+        <fcall type="string" name="f">
+          <const value="test
+" type="string"/>
+        </fcall>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

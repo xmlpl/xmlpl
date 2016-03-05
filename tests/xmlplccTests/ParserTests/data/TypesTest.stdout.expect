@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="integer" name="a">
+        <const value="1" type="integer"/>
+      </vardecl>
+      <vardecl type="integer" name="b">
+        <const value="2" type="integer"/>
+      </vardecl>
+      <vardecl type="boolean" name="c">
+        <const value="true" type="boolean"/>
+      </vardecl>
+      <vardecl type="boolean" name="d">
+        <const value="false" type="boolean"/>
+      </vardecl>
+      <vardecl type="element" name="e">
+        <elem>
+          <qname>
+            <cast to="qname" from="string">
+              <const value="x" type="string"/>
+            </cast>
+          </qname>
+        </elem>
+      </vardecl>
+      <vardecl type="element" name="f">
+        <elem>
+          <qname>
+            <cast to="qname" from="string">
+              <const value="y" type="string"/>
+            </cast>
+          </qname>
+        </elem>
+      </vardecl>
+      <vardecl type="pi" name="i">
+        <pi>
+          <const value="test" type="string"/>
+        </pi>
+      </vardecl>
+      <vardecl type="pi" name="j">
+        <pi>
+          <const value="test2" type="string"/>
+        </pi>
+      </vardecl>
+      <vardecl type="real" name="k">
+        <const value="1.0" type="real"/>
+      </vardecl>
+      <vardecl type="node[]" name="l">
+        <sequence>
+          <cast to="node" from="integer">
+            <const value="1" type="integer"/>
+          </cast>
+          <cast to="node" from="integer">
+            <const value="2" type="integer"/>
+          </cast>
+          <cast to="node" from="integer">
+            <const value="3" type="integer"/>
+          </cast>
+        </sequence>
+      </vardecl>
+      <vardecl type="node[]" name="m">
+        <sequence>
+          <cast to="node" from="string">
+            <const value="a" type="string"/>
+          </cast>
+          <cast to="node" from="integer">
+            <const value="1" type="integer"/>
+          </cast>
+          <cast to="node" from="boolean">
+            <const value="true" type="boolean"/>
+          </cast>
+        </sequence>
+      </vardecl>
+      <vardecl type="comment" name="n">
+        <comment>
+          <const value=" Test " type="string"/>
+        </comment>
+      </vardecl>
+      <vardecl type="comment" name="o">
+        <comment>
+          <const value=" Test2 " type="string"/>
+        </comment>
+      </vardecl>
+      <vardecl type="string" name="q">
+        <const value="hello" type="string"/>
+      </vardecl>
+      <vardecl type="string" name="r">
+        <const value="world" type="string"/>
+      </vardecl>
+    </block>
+  </funcdecl>
+</program>

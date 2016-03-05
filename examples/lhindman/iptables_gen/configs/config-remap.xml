@@ -1,0 +1,9 @@
+<config>
+	<interface type="public" device="eth1"/>
+	<interface type="private" device="eth0"/>
+	<rules default_action="DROP">
+		<nat enable="true"/>
+		<remap source_url="www.microsoft.com" target_url="www.linux.org" />
+	</rules>
+</config>
+

@@ -1,0 +1,44 @@
+File:  iptables_gen.xpl
+Author:  Luke Hindman
+Date:  Thu Mar 15 23:58:18 MDT 2007
+Description:  This program takes a simplified xml based iptables configuration and generates a
+	BASH shell script that contains all the command to configure an iptables firewall.
+
+Requirements:
+XMLPL Development tools and libraries (www.xmlpl.org)
+
+Compile:
+xmlplcc iptables_gen.xpl
+
+Run:
+./iptables_gen < config.xml > iptables_config.sh
+
+Files:
+configs/* - Sample xml configuration files
+iptables_gen.xpl - Main XMLPL program code
+
+Notes:  
+- Currently the supported action attributes are ACCEPT and DROP.  These must be
+in all caps as they are directly passed to IPTABLES.
+- URL remapping does not always behave as expected.  Some target sites look at
+the browser URL to display content.  Since this is the URL of the original site
+the target site gets confused.
+- I have tested the included configurations on my firewall and they all function
+as expected. Your milage may vary.
+
+Sample Configuration:
+<config>
+        <interface type="public" device="eth1"/>
+        <interface type="private" device="eth0"/>
+        <rules default_action="DROP">
+                <filter scope="public" action="ACCEPT" port="80"/>
+                <filter scope="public" action="ACCEPT" port="22"/>
+                <filter scope="public" action="ACCEPT" host="207.70.61.1" port="123"/>
+                <filter scope="private" action="ACCEPT"/>
+                <filter scope="private" action="ACCEPT" host="172.16.1.5"/>
+                <nat enable="true"/>
+                <reverse public_port="22" target_host="172.16.2.10" target_port="22" />
+                <remap source_url="www.microsoft.com" target_url="www.linux.org" />
+        </rules>
+</config>
+

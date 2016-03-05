@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="integer" name="f">
+    <block/>
+  </funcdecl>
+  <funcdecl type="integer" name="g">
+    <block>
+      <exprstmt emit="false">
+        <fcall type="integer" name="f"/>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

@@ -1,0 +1,3 @@
+./data/UndeclaredPrefixTest.xpl:4:5: error: undeclared variable p
+./data/UndeclaredPrefixTest.xpl:4:5: error: must declare prefix before use
+./data/UndeclaredPrefixTest.xpl:error: input contains errors

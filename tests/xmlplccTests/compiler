@@ -1,0 +1,22 @@
+#!/bin/bash
+OUT=$(dirname $0)/data/$(basename $0)
+XMLPL_LIBRARY_PATH=$(dirname $0)/../libs
+export XMLPL_LIBRARY_PATH
+
+OPTS="-B -Wall -B -g"
+if [ "$KEEP" != "" ]; then
+  OPTS="$OPTS --save-temps"
+fi
+
+xmlplcc $OPTS -o $OUT $OUT.xpl
+RET=$?
+
+if [ $RET -ne 0 ]; then
+    exit $?
+else
+    $OUT $@
+    RET=$?
+
+    if [ $RET -ne 0 ]; then exit $RET; fi
+    if [ "$KEEP" == "" ]; then rm -f $OUT $OUT.cpp; fi
+fi

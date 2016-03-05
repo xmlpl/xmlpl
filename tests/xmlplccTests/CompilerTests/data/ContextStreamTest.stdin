@@ -1,0 +1,6 @@
+<root>
+  <child attr="value"/>
+  <!--A Comment-->
+  Some Text
+  <?target processing instruction data?>
+</root>

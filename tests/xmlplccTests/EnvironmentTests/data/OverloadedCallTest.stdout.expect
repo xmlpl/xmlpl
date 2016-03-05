@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="integer" name="f">
+    <arg type="integer" name="x"/>
+    <arg type="string" name="y"/>
+    <block/>
+  </funcdecl>
+  <funcdecl type="string" name="f">
+    <arg type="integer" name="x"/>
+    <arg type="integer" name="y"/>
+    <block/>
+  </funcdecl>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <exprstmt>
+        <fcall type="string" name="f">
+          <const value="1" type="integer"/>
+          <fcall type="integer" name="f">
+            <const value="1" type="integer"/>
+            <const value="test" type="string"/>
+          </fcall>
+        </fcall>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

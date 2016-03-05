@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="f">
+    <arg type="integer" name="x"/>
+    <block>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <varref type="integer" release="false" name="x"/>
+        </cast>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

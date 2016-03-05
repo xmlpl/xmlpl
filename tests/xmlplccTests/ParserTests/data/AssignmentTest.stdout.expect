@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="integer" name="x">
+        <const value="1" type="integer"/>
+      </vardecl>
+      <vardecl type="integer" name="y">
+        <const value="2" type="integer"/>
+      </vardecl>
+      <vardecl type="integer" name="z">
+        <const value="3" type="integer"/>
+      </vardecl>
+      <exprstmt emit="false">
+        <assignment op="=">
+          <varref type="integer" release="false" name="x"/>
+          <assignment op="=">
+            <varref type="integer" release="false" name="y"/>
+            <assignment op="=">
+              <varref type="integer" release="false" name="z"/>
+              <const value="4" type="integer"/>
+            </assignment>
+          </assignment>
+        </assignment>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

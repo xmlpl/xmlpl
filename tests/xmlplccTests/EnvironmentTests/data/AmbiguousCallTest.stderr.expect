@@ -1,0 +1,6 @@
+./data/AmbiguousCallTest.xpl:5:3: error: ambigious function call: f(integer, integer)
+possible candidates are:
+  1:9: integer f(integer, real)
+  2:9: integer f(real, integer)
+
+./data/AmbiguousCallTest.xpl:error: input contains errors

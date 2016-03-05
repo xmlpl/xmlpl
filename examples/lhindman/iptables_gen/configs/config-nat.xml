@@ -1,0 +1,10 @@
+<config>
+	<interface type="public" device="eth1"/>
+	<interface type="private" device="eth0"/>
+
+	<rules default_action="DROP">
+		<filter scope="private" action="ACCEPT" />
+		<nat enable="true"/>
+	</rules>
+</config>
+

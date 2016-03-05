@@ -1,0 +1,2 @@
+./data/InvalidFilterContextRefTest.xpl:4:9: error: cannot reference '.' from integer predicate
+./data/InvalidFilterContextRefTest.xpl:error: input contains errors

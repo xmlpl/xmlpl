@@ -1,0 +1,4 @@
+<root xmlns:x="http://example.com/">
+  <child>No Prefix</child>
+  <x:child>With Prefix</x:child>
+</root>

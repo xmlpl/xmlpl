@@ -1,0 +1,2 @@
+./data/FuncUndeclTest.xpl:2:3: error: undeclared function this_func_was_never_declared(integer, string)
+./data/FuncUndeclTest.xpl:error: input contains errors

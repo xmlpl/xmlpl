@@ -1,0 +1,2 @@
+./data/DupFuncArgsTest.xpl:1:29: error: identifier 'x' previously declared at 1:18
+./data/DupFuncArgsTest.xpl:error: input contains errors

@@ -1,0 +1,5 @@
+./data/DuplicateCaseTest.xpl:5:8: error: case is duplicated at 7:8
+./data/DuplicateCaseTest.xpl:13:8: error: case is duplicated at 15:8
+./data/DuplicateCaseTest.xpl:15:8: error: case is duplicated at 16:8
+./data/DuplicateCaseTest.xpl:14:8: error: case is duplicated at 17:8
+./data/DuplicateCaseTest.xpl:error: input contains errors

@@ -1,0 +1,3 @@
+./data/DupFunc2Test.xpl:2:8: error: Duplicate declaration of function body, first declared at:
+  1:8: node[] f(node[], node[])
+./data/DupFunc2Test.xpl:error: input contains errors

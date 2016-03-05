@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="real" name="f">
+    <arg type="real" name="x"/>
+    <arg type="real" name="y"/>
+    <block/>
+  </funcdecl>
+  <funcdecl type="string" name="f">
+    <arg type="attribute" name="x"/>
+    <arg type="attribute" name="y"/>
+    <block/>
+  </funcdecl>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <exprstmt>
+        <cast to="node" from="real">
+          <fcall type="real" name="f">
+            <cast to="real" from="integer">
+              <const value="1" type="integer"/>
+            </cast>
+            <cast to="real" from="integer">
+              <const value="2" type="integer"/>
+            </cast>
+          </fcall>
+        </cast>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

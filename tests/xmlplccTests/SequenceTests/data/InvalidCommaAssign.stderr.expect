@@ -1,0 +1,2 @@
+./data/InvalidCommaAssign.xpl:4:5: error: cannot append to non-sequence
+./data/InvalidCommaAssign.xpl:error: input contains errors

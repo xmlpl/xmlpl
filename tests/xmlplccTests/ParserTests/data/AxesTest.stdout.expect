@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <arg type="document" name="in"/>
+    <block>
+      <exprstmt>
+        <path>
+          <varref type="document" release="false" name="in"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="element"/>
+              <nametest name="*"/>
+            </binexpr>
+            <predicates>
+              <cast to="boolean" from="element">
+                <varref type="element" release="false" name="."/>
+              </cast>
+            </predicates>
+          </step>
+        </path>
+      </exprstmt>
+      <exprstmt>
+        <path>
+          <varref type="document" release="false" name="in"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="element"/>
+              <nametest name="*"/>
+            </binexpr>
+            <predicates>
+              <path>
+                <varref type="element" release="false" name="."/>
+                <step axis="child">
+                  <binexpr op="&amp;&amp;">
+                    <typetest type="element"/>
+                    <nametest name="*"/>
+                  </binexpr>
+                </step>
+              </path>
+            </predicates>
+          </step>
+        </path>
+      </exprstmt>
+      <exprstmt>
+        <path>
+          <varref type="document" release="false" name="in"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="element"/>
+              <nametest name="*"/>
+            </binexpr>
+            <predicates>
+              <path>
+                <varref type="element" release="false" name="."/>
+                <step axis="parent">
+                  <empty/>
+                </step>
+              </path>
+            </predicates>
+          </step>
+        </path>
+      </exprstmt>
+      <exprstmt>
+        <path>
+          <varref type="document" release="false" name="in"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="element"/>
+              <nametest name="*"/>
+            </binexpr>
+            <predicates>
+              <path>
+                <varref type="element" release="false" name="."/>
+                <step axis="attribute">
+                  <nametest name="*"/>
+                </step>
+              </path>
+            </predicates>
+          </step>
+        </path>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

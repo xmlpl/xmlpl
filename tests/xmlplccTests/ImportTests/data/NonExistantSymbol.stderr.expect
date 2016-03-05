@@ -1,0 +1,3 @@
+./data/NonExistantSymbol.xpl:error: cannot find symbol 'DoesNotExist' in library '/home/jcoffland/projects/xmlpl/install//lib/xmlpl/std/libhello.la'
+./data/NonExistantSymbol.xpl:1:8: warning: import did not find any symbols
+./data/NonExistantSymbol.xpl:error: input contains errors

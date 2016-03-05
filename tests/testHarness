@@ -1,0 +1,634 @@
+#!/bin/bash
+#
+#  This software is available as Open-Source software under the
+#  terms of the new BSD license as follows:
+#
+#  Copyright (c) 2004, 2005, 2006, Cauldron Development LLC
+#  All rights reserved.
+#
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions
+#  are met:
+#
+#  * Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+#
+#  * Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+#  * Neither the name of the Cauldron Development LLC nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+#   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+#   TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+#   PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+#   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+#   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+#   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+#   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+#   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+#   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+IN="stdin"
+STD="stdout"
+ERR="stderr"
+RET="return"
+EXP="expect"
+DISABLE="disable"
+ARGS="args"
+DATADIR="data"
+
+TEST_POSTFIX="Test"
+SUITE_POSTFIX="Tests"
+
+WIDTH=80
+DIFFOPTS="-b -B"
+VALGRIND_CMD="valgrind -q --trace-children=yes"
+
+if [ "$TESTCOLOR" != "OFF" ]; then
+    SUINT_COLOR='[30;43m'
+    SINIT_COLOR='[30;46m'
+    SPASS_COLOR='[30;42m'
+    SFAIL_COLOR='[01;37;41m'
+    SDISABLE_COLOR='[01;37;44m'
+    PLAIN_COLOR='[00m'
+    INIT_COLOR='[35m'
+    UINT_COLOR='[33m'
+    PASS_COLOR='[32m'
+    FAIL_COLOR='[31m'
+    DISABLE_COLOR='[34m'
+
+    OLD_COLOR='[31m'
+    NEW_COLOR='[34m'
+fi
+
+
+check() {
+    if diff $DIFFOPTS -q $1.$EXP $1>/dev/null 2>/dev/null; then
+        return 0;
+    fi
+
+    return 1;
+}
+
+printSpaces() {
+    c=$1
+    STR=""
+    while [ $c -gt 0 ]; do
+        STR="$STR "
+        c=$(($c - 1))
+    done
+    echo -n "$STR"
+}
+
+printResult() {
+    echo -n "$2"
+    LEN=$((`echo -n "$1$2"|wc -c` + `echo -n "$3"|wc -c`))
+    printSpaces $(($WIDTH - $LEN))
+    echo $4$3$PLAIN_COLOR
+}
+
+initFile() {
+    if ! [ -e $1.$EXP ]; then
+        cp $1 $1.$EXP
+        if [ $? -ne 0 ]; then exit 1; fi
+        return 1
+    fi
+    return 0;
+}
+
+disableTest() {
+    touch $DATADIR/$1.$DISABLE
+}
+
+initializeTest() {
+    for i in $DATADIR/$1.$STD $DATADIR/$1.$ERR $DATADIR/$1.$RET; do
+        cp $i $i.$EXP
+    done
+}
+
+isInitialized() {
+    for i in $DATADIR/$1.$STD $DATADIR/$1.$ERR $DATADIR/$1.$RET; do
+        if [ ! -e $i.$EXP ]; then return 1; fi
+    done
+
+    return 0
+}
+
+doTest() {
+    TEST=$1
+
+    # Make sure TEST exists and can be executed
+    if ! [ -x "$TEST" ]; then
+        echo \'$TEST\' is not an executable file.
+        exit 1
+    fi
+    
+
+    # Create output directory if necessary
+    if [ -e $DATADIR ]; then
+        if ! [ -d $DATADIR ]; then
+            echo \'$DATADIR\' is not a directory!
+            exit 1
+        fi
+    else
+        mkdir $DATADIR
+        if [ $? -ne 0 ]; then exit 1; fi
+    fi
+    
+    
+    # Init file names
+    STD_FILE=$DATADIR/$1.$STD
+    ERR_FILE=$DATADIR/$1.$ERR
+    RET_FILE=$DATADIR/$1.$RET
+    INPUT_FILE=$DATADIR/$1.$IN
+    ARGS_FILE=$DATADIR/$1.$ARGS
+    DISABLE_FILE=$DATADIR/$1.$DISABLE
+
+
+    # Run test
+    if [ -e $DISABLE_FILE ]; then return 4; fi
+
+    if [ -e $ARGS_FILE ]; then
+        ARGS_VALUE="$(< $ARGS_FILE)"
+    else
+        ARGS_VALUE=
+    fi
+
+    V=
+    if [ $VALGRIND -eq 1 ]; then
+        V=$VALGRIND_CMD
+    fi
+    
+    if [ -e $INPUT_FILE ]; then
+        $V ./$TEST $ARGS_VALUE <$INPUT_FILE >$STD_FILE 2>$ERR_FILE
+    else
+        $V ./$TEST $ARGS_VALUE >$STD_FILE 2>$ERR_FILE
+    fi
+
+    echo $?>$RET_FILE
+    
+
+    # Check output
+    isInitialized $TEST
+    uninit=$?
+
+    if [ $uninit -eq 0 ]; then 
+        pass=1
+        otherPass=0
+        for i in ${DATADIR}/${TEST}*.${EXP}; do
+            BASE=${i/%\.expect/}
+            
+            if [ $BASE == $STD_FILE ]; then
+                check $STD_FILE
+                stdPass=$?
+                
+            elif [ $BASE == $ERR_FILE ]; then
+                check $ERR_FILE
+                errPass=$?
+                
+            elif [ $BASE == $RET_FILE ]; then
+                check $RET_FILE
+                retPass=$?
+            else
+                check $BASE
+                otherPass=$(($? + $otherPass))
+            fi
+            
+        done
+        if [ $(($stdPass + $errPass + $retPass + $otherPass)) -gt 0 ]; then
+            pass=0;
+        fi
+        
+        # Clean up if test passed
+        if [ $pass -eq 1 ]; then
+            rm $STD_FILE $ERR_FILE $RET_FILE
+        fi
+    fi
+    
+    
+    # Return result
+    if [ $uninit -eq 1 ]; then
+        return 2
+    elif [ $pass -eq 1 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+printTestResult() {
+    case $2 in 
+        0)
+            printResult "$1:" "" "[PASS]" "$PASS_COLOR"
+            ;;
+        1)
+            STR=""
+            if [ $stdPass -gt 0 ]; then STR="$STR $STD"; fi
+            if [ $errPass -gt 0 ]; then STR="$STR $ERR"; fi
+            if [ $retPass -gt 0 ]; then STR="$STR $RET"; fi
+            if [ $otherPass -gt 0 ]; then STR="$STR other"; fi
+            printResult "$1:" "$STR" "[FAIL]" "$FAIL_COLOR"
+            ;;
+        2)
+            printResult "$1:" "" "[UINT]" "$UINT_COLOR"
+            ;;
+        3)
+            printResult "$1:" "" "[INIT]" "$INIT_COLOR"
+            ;;
+        4)  printResult "$1:" "" "[DISABLED]" "$DISABLE_COLOR"
+            ;;
+    esac
+}
+
+diffTest() {
+    TEST=$1
+
+    C=0
+    for i in ${DATADIR}/${TEST}*.${EXP}; do
+        BASE=${i/%\.expect/}
+
+        check $BASE
+        if [ $? -ne 0 ]; then
+            printLabeledBar $BASE
+            diff $DIFFOPTS $i $BASE | egrep "^[<>]" | sed\
+                "s/\(^<.*$\)/$OLD_COLOR\1$PLAIN_COLOR/;s/\(^>.*$\)/$NEW_COLOR\1$PLAIN_COLOR/"
+
+            C=$[$C + 1]
+        fi
+    done
+
+    if [ $C -gt 0 ]; then
+        printBar
+    fi
+}
+
+printLabeledBar() {
+    LEN=$((`echo "$1"|wc -c` + 2))
+    c=$((($WIDTH - $LEN) / 2))
+    d=$(($WIDTH - $c - $LEN + 1))
+    
+    STR1=""
+    while [ $c -gt 0 ]; do
+        STR1="$STR1*"
+        c=$(($c - 1))
+    done
+
+    STR2=""
+    while [ $d -gt 0 ]; do
+        STR2="$STR2*"
+        d=$(($d - 1))
+    done
+
+    echo "$STR1 $1 $STR2"
+}
+
+printBar() {
+    c=0
+    STR=""
+    while [ $c -lt $WIDTH ]; do
+        STR="$STR*"
+        c=$(($c + 1))
+    done
+    echo "$STR"
+}
+
+
+printLine() {
+    LEN=$((`echo -n $1|wc -c` + `echo -n $2|wc -c`))
+    echo -ne $1
+    printSpaces $(($WIDTH - $LEN))
+    echo -ne $2
+}
+
+interact() {
+    TEST_RESULT=$2
+
+    while [ $INTERACTIVE -eq 1 ]; do
+        echo -n "(a)bort (c)ontinue (D)isable (d)iff "
+        echo -n "(i)nitialize (r)eset (t)est (q)uit (v)iew? "
+        read REPLY
+
+        case "$REPLY" in
+            "a") exit 0 ;;
+
+            "c") break ;;
+
+            "D") disableTest $1; return 4 ;;
+
+            "d") diffTest $1 ;;
+
+            "i") initializeTest $1; return 3 ;;
+
+            "r") resetTest $1; TEST_RESULT=2 ;;
+
+            "t") runTest $1; TEST_RESULT=$?; ;;
+                
+                "q") INTERACTIVE=0 ;;
+            
+            "v") viewTest $1 ;;
+
+            "") break ;; # Default to continue
+        esac
+    done
+
+    return $TEST_RESULT
+}
+
+runTest() {
+    echo -n "$1:"
+    doTest $1
+    TEST_RESULT=$?
+    printTestResult $1 $TEST_RESULT
+
+    return $TEST_RESULT
+}
+
+runTestInteractive() {
+    runTest $1
+    TEST_RESULT=$?
+    
+    if [ $TEST_RESULT -ne 0 -a $TEST_RESULT -ne 4 ]; then
+        interact $1 $TEST_RESULT
+        TEST_RESULT=$?
+    fi
+
+    return $TEST_RESULT
+}
+
+runSuiteLocal() {
+		NAME=
+		DPATH=$(pwd)
+		while true; do
+  		DIR=$(basename $DPATH)
+			DPATH=$(dirname $DPATH)
+			if [[ "$DIR" != *$SUITE_POSTFIX ]]; then break; fi
+
+			PART=$(echo "$DIR" | sed 's/\(.*\)Tests/\1/')
+
+			if [ "$NAME" == "" ]; then
+					NAME="$PART"
+			else
+					NAME="$PART.$NAME"
+			fi
+		done
+
+    printLabeledBar "Test Suite: $NAME"
+
+    TESTS=$(ls -dt *$TEST_POSTFIX 2>/dev/null)
+    for i in $TESTS; do
+
+        runTestInteractive $i
+        case $? in
+            0)
+                passed=$(($passed + 1))
+                ;;
+            
+            1)
+                failed=$(($failed + 1))
+                ;;
+            
+            2)
+                uninited=$(($uninited + 1))
+                ;;
+            
+            3)
+                inited=$(($inited + 1))
+                ;;
+
+            4)
+                disabled=$(($disabled + 1))
+                ;;
+        esac
+    done
+
+    echo
+    suites=$(($suites + 1))
+
+		runSuites
+}
+
+runSuite() {
+
+    CWD=`pwd`
+    if ! cd $1; then
+        echo "Cannot change to directory '$1'!"
+        exit 1
+    fi
+
+    runSuiteLocal $1
+
+    cd $CWD
+}
+
+runSuites() {
+		for i in `ls -dt *$SUITE_POSTFIX 2>/dev/null`; do
+				runSuite $i
+		done
+}
+
+printFile() {
+    if [ -e "$1" ]; then
+        printLabeledBar "$1"
+        cat "$1"
+    fi
+}
+
+viewTest() {
+    # Init file names
+    STD_FILE=$DATADIR/$1.$STD
+    ERR_FILE=$DATADIR/$1.$ERR
+    RET_FILE=$DATADIR/$1.$RET
+    IN_FILE=$DATADIR/$1.$IN
+
+    FILES="$IN_FILE $STD_FILE $STD_FILE.$EXP $ERR_FILE\
+           $ERR_FILE.$EXP $RET_FILE $RET_FILE.$EXP"
+
+    for i in $FILES; do
+        printFile "$i"
+    done
+    printBar
+}
+
+resetTest() {
+    # Init file names
+    STD_FILE=$DATADIR/$1.$STD
+    ERR_FILE=$DATADIR/$1.$ERR
+    RET_FILE=$DATADIR/$1.$RET
+    DISABLE_FILE=$DATADIR/$1.$DISABLE
+
+    rm -f "$STD_FILE.$EXP" "$ERR_FILE.$EXP" "$RET_FILE.$EXP $DISABLE_FILE"
+}
+
+testHarness() {
+    time {
+        
+        DATE=`date`
+        printLabeledBar "$DATE"
+        printLine "Test Name: [file...]" "Result"
+        echo
+        
+        suites=0
+        passed=0
+        uninited=0
+        inited=0
+        failed=0
+        disabled=0
+        
+        if [ "$1" == "" ]; then
+            THISDIR=$(basename $(pwd))
+            if [[ "$THISDIR" == *$SUITE_POSTFIX ]]; then
+                runSuiteLocal $THISDIR
+            fi
+            
+						runSuites
+        else
+            while [ "$1" != "" ]; do
+                runSuite $1
+                shift
+            done
+        fi
+        
+        total=$(($passed + $failed + $inited + $uninited + $disabled))
+        
+        printLabeledBar "Summary"
+        
+        if test $passed -gt 0 -a $failed -eq 0 -a $inited -eq 0 -a $uninited -eq 0; then
+            echo -n $SPASS_COLOR
+        fi
+
+        printLine "Passed" $passed
+        echo -e $PLAIN_COLOR
+
+        if [ $failed -gt 0 ]; then
+            echo -n $SFAIL_COLOR
+        fi
+        printLine "Failed" $failed
+        echo $PLAIN_COLOR
+
+        if [ $uninited -gt 0 ]; then
+            echo -n $SUINT_COLOR
+        fi
+        printLine "Uninitialized" $uninited
+        echo $PLAIN_COLOR
+
+        if [ $inited -gt 0 ]; then
+            echo -n $SINIT_COLOR
+        fi
+        printLine "Initialized" $inited
+        echo $PLAIN_COLOR
+
+        if [ $disabled -gt 0 ]; then
+            echo -n $SDISABLE_COLOR
+        fi
+        printLine "Disabled" $disabled
+        echo $PLAIN_COLOR
+
+
+        printBar
+        printLine "Suites" $suites
+        echo
+        printLine "Tests" $total
+        echo
+        echo
+        echo -n "Execution Time:"
+    }
+    printBar
+}
+
+initTest() {
+    resetTest $1
+    doTest $1
+    initializeTest $1
+    viewTest $1
+}
+
+tryTest() {
+    runTest $1
+    viewTest $1
+}
+
+usage() {
+    echo -n "Usage: $0 "
+
+    case "$BASENAME" in 
+        viewTest)
+            echo "<test>"
+            ;;
+        runTest)
+            echo "[-I] [-V] <test>"
+            ;;
+        initTest)
+            echo "<test>"
+            ;;
+        resetTest)
+            echo "<test>"
+            ;;
+        tryTest)
+            echo "<test>"
+            ;;
+        *)
+            echo "[-I] [-V] <test>"
+            echo "  -I    Interactive mode"
+            echo "  -V    Run tests under valgrind"
+            ;;
+    esac
+
+    exit 0
+}
+
+BASENAME=`basename $0`
+
+INTERACTIVE=0
+VALGRIND=0
+TESTNAME=
+
+while [ "$1" != "" ]; do
+    case "$1" in
+        --help)
+            usage
+            ;;
+        -I)
+            INTERACTIVE=1
+            ;;
+        -V)
+            VALGRIND=1
+            ;;
+        *)
+            TESTNAME=$1
+            ;;
+    esac
+
+    shift
+done
+
+case "$BASENAME" in
+    viewTest)
+        if [ "$TESTNAME" == "" ]; then usage; fi
+        viewTest $TESTNAME
+        ;;
+    runTest)
+        if [ "$TESTNAME" == "" ]; then usage; fi
+        runTestInteractive $TESTNAME
+        ;;
+    initTest)
+        if [ "$TESTNAME" == "" ]; then usage; fi
+        initTest $TESTNAME
+        ;;
+    resetTest)
+        if [ "$TESTNAME" == "" ]; then usage; fi
+        resetTest $TESTNAME
+        ;;
+    tryTest)
+        if [ "$TESTNAME" == "" ]; then usage; fi
+        tryTest $TESTNAME
+        ;;
+    *)
+        testHarness $TESTNAME
+        ;;
+esac

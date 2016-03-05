@@ -1,0 +1,3 @@
+./data/FuncOnlyReturnTest.xpl:2:8: error: function declarations differ only in return type, first declared at:
+  1:9: integer f(integer)
+./data/FuncOnlyReturnTest.xpl:error: input contains errors

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="latin1"?>
+<program>
+  <funcdecl type="sequence" qname="node" line="1" context="false" column="5">
+    <block line="1" column="12"/>
+  </funcdecl>
+  <funcdecl type="sequence" qname="main" line="3" context="false" column="5">
+    <block line="3" column="12">
+      <vardecl type="sequence" qname="x" line="4" column="7"/>
+      <exprstmt line="6" column="4">
+        <path line="6" column="4">
+          <path line="6" column="4">
+            <varref type="sequence" release="false" qname="x" line="6"
+            column="3"/>
+            <step line="6" column="4" axis="descendant_or_self">
+              <fcall type="sequence" qname="node" line="6" context="false"
+              column="4"/>
+            </step>
+          </path>
+          <step line="6" column="6" axis="child">
+            <nametest text="child" line="6" column="6"/>
+          </step>
+        </path>
+      </exprstmt>
+      <exprstmt line="7" column="31">
+        <path line="7" column="31">
+          <path line="7" column="4">
+            <varref type="sequence" release="false" qname="x" line="7"
+            column="3"/>
+            <step line="7" column="25" axis="descendant_or_self">
+              <fcall type="sequence" qname="node" line="7" context="false"
+              column="25"/>
+            </step>
+          </path>
+          <step line="7" column="32" axis="child">
+            <nametest text="child" line="7" column="32"/>
+          </step>
+        </path>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

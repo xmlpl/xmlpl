@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <import name="test.hello"/>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <exprstmt>
+        <fcall type="string" name="test.hello.hello"/>
+      </exprstmt>
+      <exprstmt>
+        <fcall type="string" name="test.hello.hello"/>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

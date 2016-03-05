@@ -1,0 +1,5 @@
+./data/AmbigiousRefTest.xpl:6:3: error: identifier 'hello_world' is ambiguous within this context
+possible candidates are:
+  1:8: string hello_world
+  3:8: string test.hello.hello_world
+./data/AmbigiousRefTest.xpl:error: input contains errors

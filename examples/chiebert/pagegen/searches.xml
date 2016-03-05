@@ -1,0 +1,6 @@
+<searches>
+  <search name="Google" 	query="q" 		submit="btnG" 	href="http://www.google.com/search"/>
+  <search name="RPM Find" 	query="query" 	submit="submit" href="http://rpmfind.net/linux/rpm2html/search.php"/>
+  <search name="RPM Find2" 	query="query" 	submit="submit" href="http://rpmfind.net/linux/rpm2html/search.php"/>
+  <search name="Google2" 	query="q" 		submit="btnG" 	href="http://www.google.com/search"/>
+</searches>

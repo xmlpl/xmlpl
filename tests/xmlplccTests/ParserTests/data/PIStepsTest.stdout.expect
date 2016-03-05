@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x"/>
+      <exprstmt>
+        <path>
+          <varref type="node[]" release="false" name="x"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="pi"/>
+              <nametest name="target"/>
+            </binexpr>
+          </step>
+        </path>
+      </exprstmt>
+      <exprstmt>
+        <path>
+          <varref type="node[]" release="false" name="x"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="pi"/>
+              <nametest name="*"/>
+            </binexpr>
+          </step>
+        </path>
+      </exprstmt>
+      <exprstmt>
+        <path>
+          <varref type="node[]" release="false" name="x"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="pi"/>
+              <nametest name="regex"/>
+            </binexpr>
+          </step>
+        </path>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

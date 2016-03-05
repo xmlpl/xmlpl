@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <exprstmt>
+        <cast to="node" from="boolean">
+          <const value="true" type="boolean"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <const value="
+" type="string"/>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="boolean">
+          <const value="false" type="boolean"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <const value="
+" type="string"/>
+      </exprstmt>
+      <exprstmt>
+        <const value="A string.
+" type="string"/>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <const value="1" type="integer"/>
+        </cast>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="real">
+          <const value="1.1" type="real"/>
+        </cast>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

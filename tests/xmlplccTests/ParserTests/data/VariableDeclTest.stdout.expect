@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x">
+        <sequence>
+          <cast to="node" from="integer">
+            <const value="1" type="integer"/>
+          </cast>
+          <cast to="node" from="integer">
+            <const value="2" type="integer"/>
+          </cast>
+          <cast to="node" from="integer">
+            <const value="3" type="integer"/>
+          </cast>
+        </sequence>
+      </vardecl>
+      <vardecl type="integer" name="y"/>
+    </block>
+  </funcdecl>
+</program>

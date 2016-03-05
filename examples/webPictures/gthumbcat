@@ -1,0 +1,9 @@
+#!/bin/sh
+COL="$HOME/.gnome2/gthumb/collections/$1.gqv"
+
+if [ ! -e "$COL" ]; then
+  echo "Cannot find gthumb collection '$1'" 1>&2
+  exit 1
+fi
+
+cat "$COL" | sed 's/"//g;s/file:\/\///' | grep -ve '^#'

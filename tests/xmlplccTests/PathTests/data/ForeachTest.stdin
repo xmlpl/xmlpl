@@ -1,0 +1,7 @@
+<people>
+  <person name="Fred Jones" sex="male"/>
+  <person name="Daphne Blake" sex="female"/>
+  <person name="Norville 'Shaggy' Rogers" sex="male"/>
+  <person name="Velma Dinkley" sex="female"/>
+  <person name="Scooby Doo" sex="male"/>
+</people>

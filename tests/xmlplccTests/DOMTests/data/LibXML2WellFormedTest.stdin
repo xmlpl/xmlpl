@@ -1,0 +1,6 @@
+<root xmlns:pre="http://example.com" pre:name="value">
+  <pre:child attr="test"/>
+  <?target data?>
+  <!-- Comment -->
+  Text
+</root>

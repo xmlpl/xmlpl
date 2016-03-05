@@ -1,0 +1,13 @@
+#!/bin/sh
+
+DIR="$(dirname "$0")"
+
+echo "<collection>"
+
+for i in $("$DIR"/gthumbcat $1 | grep -v '^#' | sort); do
+    echo "<image file='$i'>"
+    exif -x "$i"
+    echo "</image>"
+done
+
+echo "</collection>"

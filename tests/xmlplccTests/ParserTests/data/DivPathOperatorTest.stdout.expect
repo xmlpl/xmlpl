@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x"/>
+      <vardecl type="integer" name="y"/>
+      <exprstmt>
+        <path>
+          <varref type="node[]" release="false" name="x"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="element"/>
+              <nametest name="name"/>
+            </binexpr>
+          </step>
+        </path>
+      </exprstmt>
+      <exprstmt>
+        <cast to="node" from="integer">
+          <binexpr op="/">
+            <varref type="integer" release="false" name="y"/>
+            <const value="1" type="integer"/>
+          </binexpr>
+        </cast>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

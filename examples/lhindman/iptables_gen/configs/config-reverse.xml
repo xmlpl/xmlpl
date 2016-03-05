@@ -1,0 +1,9 @@
+<config>
+	<interface type="public" device="eth1"/>
+	<interface type="private" device="eth0"/>
+
+	<rules>
+		<reverse public_port="22" target_host="172.16.2.10" target_port="22" />
+	</rules>
+</config>
+

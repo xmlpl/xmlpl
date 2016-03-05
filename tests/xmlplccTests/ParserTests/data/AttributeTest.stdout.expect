@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <arg type="node[]" name="args"/>
+    <block>
+      <exprstmt>
+        <elem>
+          <qname>
+            <cast to="qname" from="string">
+              <const value="x" type="string"/>
+            </cast>
+          </qname>
+          <attr>
+            <qname>
+              <cast to="qname" from="string">
+                <const value="name" type="string"/>
+              </cast>
+            </qname>
+            <const value="value" type="string"/>
+          </attr>
+        </elem>
+      </exprstmt>
+      <exprstmt>
+        <elem>
+          <qname>
+            <cast to="qname" from="string">
+              <const value="x" type="string"/>
+            </cast>
+          </qname>
+          <attr>
+            <qname>
+              <cast to="qname" from="string">
+                <const value="name" type="string"/>
+              </cast>
+            </qname>
+            <const value="value" type="string"/>
+          </attr>
+        </elem>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>

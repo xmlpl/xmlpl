@@ -1,0 +1,15 @@
+<config>
+	<interface type="public" device="eth1"/>
+	<interface type="private" device="eth0"/>
+	<rules default_action="DROP">
+		<filter scope="public" action="ACCEPT" port="80"/>
+		<filter scope="public" action="ACCEPT" port="22"/>
+		<filter scope="public" action="ACCEPT" host="207.70.61.1" port="123"/>
+		<filter scope="private" action="ACCEPT"/>
+		<filter scope="private" action="ACCEPT" host="172.16.1.5"/>
+		<nat enable="true"/>
+		<reverse public_port="22" target_host="172.16.2.10" target_port="22" />
+		<remap source_url="www.microsoft.com" target_url="www.linux.org" />
+	</rules>
+</config>
+

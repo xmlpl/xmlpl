@@ -1,0 +1,2 @@
+./data/InvalidExplicitCast.xpl:3:11: error: invalid cast from real to integer
+./data/InvalidExplicitCast.xpl:error: input contains errors

@@ -1,0 +1,15 @@
+Source: xmlpl
+Section: unknown
+Priority: optional
+Maintainer: Joseph Coffland <joseph@xmlpl.org>
+Build-Depends: debhelper (>= 4.0.0), autotools-dev, xmlplcc, libxmlpl-cpp-standard, cdbs, debhelper (>= 4.0)
+Standards-Version: 3.6.2
+
+Package: xmlpl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, xmlplcc, libxmlpl-cpp-standard
+Description: XmlPL language, tests and examples
+ *** Unofficial package from joseph@xmlpl.org ***
+ .
+ XmlPL language, tests and examples.
+ See xmlpl.org

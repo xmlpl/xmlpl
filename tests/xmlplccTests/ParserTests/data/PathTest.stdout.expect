@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="latin1"?>
+<program>
+  <funcdecl type="node[]" name="main">
+    <block>
+      <vardecl type="node[]" name="x"/>
+      <exprstmt>
+        <path>
+          <varref type="node[]" release="false" name="x"/>
+          <step axis="child">
+            <binexpr op="&amp;&amp;">
+              <typetest type="element"/>
+              <nametest name="name0"/>
+            </binexpr>
+            <predicates>
+              <step axis="child">
+                <binexpr op="&amp;&amp;">
+                  <typetest type="element"/>
+                  <nametest name="name1"/>
+                </binexpr>
+                <predicates>
+                  <step axis="child">
+                    <binexpr op="&amp;&amp;">
+                      <typetest type="element"/>
+                      <nametest name="name2"/>
+                    </binexpr>
+                    <predicates>
+                      <binexpr op="==">
+                        <const value="pred5" type="string"/>
+                        <const value="" type="string"/>
+                      </binexpr>
+                      <binexpr op="==">
+                        <const value="pred6" type="string"/>
+                        <const value="" type="string"/>
+                      </binexpr>
+                    </predicates>
+                  </step>
+                  <binexpr op="==">
+                    <const value="pred3" type="string"/>
+                    <const value="" type="string"/>
+                  </binexpr>
+                  <binexpr op="==">
+                    <const value="pred4" type="string"/>
+                    <const value="" type="string"/>
+                  </binexpr>
+                </predicates>
+              </step>
+              <binexpr op="==">
+                <const value="pred1" type="string"/>
+                <const value="" type="string"/>
+              </binexpr>
+              <binexpr op="==">
+                <const value="pred2" type="string"/>
+                <const value="" type="string"/>
+              </binexpr>
+            </predicates>
+          </step>
+        </path>
+      </exprstmt>
+    </block>
+  </funcdecl>
+</program>
