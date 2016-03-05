@@ -68,10 +68,7 @@ AC_CHECK_CONFIG(libxmlpl_cpp_standard, $VERSION, , [AC_MSG_ERROR([Required libra
 
 
 # Create Makefiles
-AC_OUTPUT([Makefile
-	  examples/Makefile
-	  tests/Makefile
-    ])
+AC_OUTPUT([Makefile])
 
 echo
 echo

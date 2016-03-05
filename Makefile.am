@@ -1,5 +1,5 @@
-SUBDIRS=examples
-DIST_SUBDIRS = $(SUBDIRS) tests
+#SUBDIRS=examples
+#DIST_SUBDIRS = $(SUBDIRS) tests
 ACLOCAL_AMFLAGS = -I config/m4
 EXTRA_DIST = autogen.sh config/m4 debian
 
