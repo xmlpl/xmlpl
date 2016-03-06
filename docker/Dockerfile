@@ -8,63 +8,63 @@ RUN apt-get update && \
 
 RUN apt-get update && \
   apt-get install -y build-essential libtool libltdl3-dev libgc-dev \
-  libcurl3-dev libxml2-dev
+  libcurl3-dev libxml2-dev m4 automake libtool-bin
 
-# Get source code
-RUN git clone --depth=1 https://github.com/xmlpl/libantlr.git
-RUN git clone --depth=1 https://github.com/xmlpl/libbasicutils.git
-RUN git clone --depth=1 https://github.com/xmlpl/libxmlpl-cpp-standard.git
-RUN git clone --depth=1 https://github.com/xmlpl/libxmlpl-cpp-runtime.git
-RUN git clone --depth=1 https://github.com/xmlpl/xmlplcc.git
-RUN git clone --depth=1 https://github.com/xmlpl/xmlpl.git
-
-RUN apt-get update && \
-  apt-get install -y m4 automake
+# Environment
+ENV INSTALL_PATH=/usr/local/xmlpl
+ENV PATH=$INSTALL_PATH/bin:$PATH
 
 # Build libantlr
-RUN cd libantlr &&\
+RUN git clone --depth=1 https://github.com/xmlpl/libantlr.git &&\
+  cd libantlr &&\
   ./autogen.sh &&\
-  ./configure --prefix=/install &&\
+  ./configure --prefix=$INSTALL_PATH &&\
   make -j$(grep -c ^processor /proc/cpuinfo) &&\
   make install
 
 # Build libbasicutils
-RUN cd libbasicutils &&\
+RUN git clone --depth=1 https://github.com/xmlpl/libbasicutils.git &&\
+  cd libbasicutils &&\
   ./autogen.sh &&\
-  ./configure --prefix=/install &&\
+  ./configure --prefix=$INSTALL_PATH &&\
   make -j$(grep -c ^processor /proc/cpuinfo) &&\
   make install
 
 # Build libxmlpl-cpp-runtime
-RUN cd libxmlpl-cpp-runtime &&\
+RUN git clone --depth=1 https://github.com/xmlpl/libxmlpl-cpp-runtime.git &&\
+  cd libxmlpl-cpp-runtime &&\
   ./autogen.sh &&\
-  ./configure --prefix=/install &&\
+  ./configure --prefix=$INSTALL_PATH &&\
   make -j$(grep -c ^processor /proc/cpuinfo) &&\
   make install
 
 # Build xmlplcc
-RUN cd xmlplcc &&\
+RUN git clone --depth=1 https://github.com/xmlpl/xmlplcc.git &&\
+  cd xmlplcc &&\
   ./autogen.sh &&\
-  ./configure --prefix=/install &&\
+  ./configure --prefix=$INSTALL_PATH &&\
   make -j$(grep -c ^processor /proc/cpuinfo) &&\
   make install
 
 # Build libxmlpl-cpp-standard
-RUN cd libxmlpl-cpp-standard &&\
+RUN git clone --depth=1 https://github.com/xmlpl/libxmlpl-cpp-standard.git &&\
+  cd libxmlpl-cpp-standard &&\
   ./autogen.sh &&\
-  ./configure --prefix=/install &&\
+  ./configure --prefix=$INSTALL_PATH &&\
   make -j$(grep -c ^processor /proc/cpuinfo) &&\
   make install
 
 # Build xmlpl
-RUN cd xmlpl &&\
+RUN git clone --depth=1 https://github.com/xmlpl/xmlpl.git &&\
+  cd xmlpl &&\
   ./autogen.sh &&\
-  ./configure --prefix=/install &&\
+  ./configure --prefix=$INSTALL_PATH &&\
   make -j$(grep -c ^processor /proc/cpuinfo) &&\
   make install
 
 
-ENTRYPOINT ["/bin/bash", "-c", "mkdir /host/xmlpl; cp -av /install /host/xmlpl"]
+ENTRYPOINT [\
+  "/bin/bash", "-c", "mkdir /host/xmlpl; cp -av $INSTALL_PATH /host/xmlpl"]
 
 # Build like this:
 #
